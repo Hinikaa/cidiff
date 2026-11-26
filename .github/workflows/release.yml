@@ -1,0 +1,56 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Release tag (e.g. v0.1.0)"
+        required: false
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run build
+      - run: npm test
+
+      - name: Pack release artifacts
+        run: |
+          rm -rf release
+          mkdir -p release
+          ver="$(node -p "require('./package.json').version")"
+          npm pack --pack-destination release
+          stage="$(mktemp -d)"
+          pkg_dir="$stage/cidiff-$ver"
+          mkdir -p "$pkg_dir"
+          cp -r dist package.json action.yml README.md LICENSE "$pkg_dir/"
+          tar -C "$stage" -czf "release/cidiff-${ver}-node.tar.gz" "cidiff-$ver"
+          (cd "$stage" && zip -qr "$GITHUB_WORKSPACE/release/cidiff-${ver}-node.zip" "cidiff-$ver")
+          rm -rf "$stage"
+          (cd release && sha256sum * > checksums.txt)
+
+      - name: Publish GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          INPUT_TAG: ${{ github.event.inputs.tag }}
+        run: |
+          TAG="${INPUT_TAG:-${GITHUB_REF_NAME}}"
+          if ! gh release view "$TAG" >/dev/null 2>&1; then
+            gh release create "$TAG" --title "$TAG" --notes "Release $TAG"
+          fi
+          gh release upload "$TAG" release/* --clobber

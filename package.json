@@ -1,6 +1,6 @@
 {
   "name": "cidiff",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Zero-SaaS GitHub Action and CLI for comparing CI step, BuildKit layer, and test durations against main",
   "type": "module",
   "main": "dist/index.js",

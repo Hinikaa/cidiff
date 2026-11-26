@@ -7,6 +7,7 @@
 
 <p align="center">
   <a href="https://github.com/Hinikaa/cidiff/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/Hinikaa/cidiff/ci.yml?style=flat-square&label=ci" alt="CI"></a>
+  <a href="https://github.com/Hinikaa/cidiff/releases"><img src="https://img.shields.io/github/v/release/Hinikaa/cidiff?style=flat-square&color=58a6ff" alt="Release"></a>
   <img src="https://img.shields.io/badge/node-20%2B-339933?style=flat-square&logo=nodedotjs&logoColor=white" alt="Node 20+">
   <img src="https://img.shields.io/badge/runtime_deps-0-2ea043?style=flat-square" alt="Zero runtime dependencies">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-555555?style=flat-square" alt="MIT License"></a>
@@ -26,11 +27,15 @@ Total workflow timers tell you CI got slower, not why. `cidiff` compares a PR ru
 
 ### CLI
 
+Install the prebuilt package tarball from [Releases](https://github.com/Hinikaa/cidiff/releases):
+
 ```sh
-npm install -g cidiff
+npm install -g https://github.com/Hinikaa/cidiff/releases/download/v0.1.0/cidiff-0.1.0.tgz
 ```
 
-Or run from a built checkout:
+Or extract the portable Node archive (`cidiff-0.1.0-node.tar.gz` / `.zip`) and run `node dist/cli.js --help`.
+
+Or build from a checkout:
 
 ```sh
 npm install && npm run build
