@@ -15,6 +15,7 @@
   ],
   "scripts": {
     "build": "tsc && chmod +x dist/cli.js",
+    "demo": "bash demo/run-demo.sh",
     "typecheck": "tsc --noEmit",
     "test": "node --test test/*.test.mjs"
   },

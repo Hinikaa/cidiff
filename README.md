@@ -1,6 +1,26 @@
-# cidiff
+<h1 align="center">cidiff</h1>
 
-`cidiff` is a zero-SaaS GitHub Action and CLI that compares CI performance on a pull request against `main` across workflow step durations, Docker BuildKit layer cache hits/misses, and per-test timings. It runs on Node 20+ with zero runtime dependencies and posts a single updated PR summary comment.
+<p align="center">
+  <strong>Zero-SaaS GitHub Action and CLI that explains why a pull request slowed CI down.</strong><br>
+  Node 20+ &middot; zero runtime dependencies &middot; correlates workflow steps, Docker BuildKit cache misses, and per-test timings
+</p>
+
+<p align="center">
+  <a href="https://github.com/Hinikaa/cidiff/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/Hinikaa/cidiff/ci.yml?style=flat-square&label=ci" alt="CI"></a>
+  <img src="https://img.shields.io/badge/node-20%2B-339933?style=flat-square&logo=nodedotjs&logoColor=white" alt="Node 20+">
+  <img src="https://img.shields.io/badge/runtime_deps-0-2ea043?style=flat-square" alt="Zero runtime dependencies">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-555555?style=flat-square" alt="MIT License"></a>
+</p>
+
+<p align="center">
+  <img src="assets/demo.svg" alt="cidiff demo" width="840">
+</p>
+
+---
+
+## Why
+
+Total workflow timers tell you CI got slower, not why. `cidiff` compares a PR run against `main` across three signals at once: GitHub Actions job/step durations, Docker BuildKit `--progress=plain` layer cache flips (`CACHED -> MISS`), and test durations (`JUnit XML`, `go test -json`, `Vitest`/`Jest` JSON). It updates a single `<!-- cidiff -->` PR comment and optionally writes a self-contained HTML diff report.
 
 ## Install and Usage
 
@@ -16,6 +36,12 @@ Or run from a built checkout:
 npm install && npm run build
 node dist/cli.js record --out base.json --junit test-results.xml --buildkit buildkit.log
 node dist/cli.js compare --base base.json --head head.json --format markdown --fail-on-regression
+```
+
+Run the included fixture demo locally:
+
+```sh
+npm run demo
 ```
 
 ### GitHub Action
@@ -91,7 +117,7 @@ Exit codes: `0` ok, `1` regression threshold exceeded with `--fail-on-regression
 
 ## Extending Parsers
 
-Register custom test report formats with `registerTestParser` from `src/parsers/index.ts`:
+Register custom test report formats with `registerTestParser` from [src/parsers/index.ts](src/parsers/index.ts):
 
 ```ts
 import { registerTestParser, parseTestFile } from "cidiff";
@@ -110,4 +136,4 @@ const tests = parseTestFile("custom", rawContent);
 
 ## License
 
-MIT
+[MIT](LICENSE)
