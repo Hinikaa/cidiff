@@ -1,0 +1,5 @@
+[
+  { "job": "build", "name": "Checkout", "durationSec": 2.1, "status": "success" },
+  { "job": "build", "name": "Docker build", "durationSec": 8.4, "status": "success" },
+  { "job": "build", "name": "Run tests", "durationSec": 14.5, "status": "success" }
+]

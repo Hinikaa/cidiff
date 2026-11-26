@@ -1,0 +1,29 @@
+{
+  "name": "cidiff",
+  "version": "1.0.0",
+  "description": "Zero-SaaS GitHub Action and CLI for comparing CI step, BuildKit layer, and test durations against main",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "cidiff": "dist/cli.js"
+  },
+  "files": [
+    "dist/",
+    "action.yml",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc && chmod +x dist/cli.js",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test test/*.test.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.9.3"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "MIT"
+}

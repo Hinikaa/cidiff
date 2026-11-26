@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="api-suite" tests="5" time="5.10">
+  <testsuite name="auth.spec" tests="4" failures="1" skipped="1" time="4.95">
+    <testcase name="validates JWT &amp; scopes" classname="auth.spec" time="2.65" />
+    <testcase time="0.55" classname="auth.spec" name="issues refresh token &lt;v2&gt;" />
+    <testcase classname="auth.spec" name="legacy session fallback" time="0.10">
+      <skipped message="deprecated" />
+    </testcase>
+    <testcase name="rotates signing keys" classname="auth.spec" time="1.80">
+      <failure message="timeout">key rotation exceeded budget</failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="billing.spec" tests="1" time="0.15">
+    <testcase name="calculates tax &quot;EU&quot;" time="0.15" />
+  </testsuite>
+</testsuites>

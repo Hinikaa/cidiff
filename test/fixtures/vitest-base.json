@@ -1,0 +1,23 @@
+{
+  "numTotalTests": 2,
+  "numPassedTests": 2,
+  "testResults": [
+    {
+      "name": "src/search.test.ts",
+      "assertionResults": [
+        {
+          "fullName": "search indexes 10k docs",
+          "title": "indexes 10k docs",
+          "status": "passed",
+          "duration": 420
+        },
+        {
+          "fullName": "search ranks exact matches first",
+          "title": "ranks exact matches first",
+          "status": "passed",
+          "duration": 950
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+name: "cidiff"
+description: "Compare CI step, Docker BuildKit layer, and per-test durations against main"
+inputs:
+  baseline-file:
+    description: "Path to baseline snapshot JSON file; falls back to latest successful base branch run via GitHub API"
+    required: false
+  junit-paths:
+    description: "Comma or newline separated paths to JUnit XML test reports"
+    required: false
+  gotest-paths:
+    description: "Comma or newline separated paths to go test -json NDJSON files"
+    required: false
+  vitest-paths:
+    description: "Comma or newline separated paths to Vitest/Jest JSON report files"
+    required: false
+  buildkit-log:
+    description: "Path to docker buildx build --progress=plain log file"
+    required: false
+  github-token:
+    description: "GitHub token for fetching workflow job timings and posting PR comments"
+    required: false
+    default: "${{ github.token }}"
+  comment:
+    description: "Post or update a PR summary comment (true/false)"
+    required: false
+    default: "true"
+  step-threshold-sec:
+    description: "Minimum step duration increase in seconds to flag as a regression"
+    required: false
+    default: "5"
+  test-threshold-sec:
+    description: "Minimum test duration increase (or new test duration) in seconds to flag as a regression"
+    required: false
+    default: "1"
+  fail-on-regression:
+    description: "Fail the action if any regression or Docker cache miss is detected (true/false)"
+    required: false
+    default: "false"
+  html-report-path:
+    description: "Optional file path to write the self-contained HTML diff report"
+    required: false
+outputs:
+  total-delta-sec:
+    description: "Total duration delta in seconds between base and head"
+  regression-count:
+    description: "Count of detected step regressions, Docker cache misses, and test regressions"
+  report-markdown:
+    description: "Rendered Markdown diff summary"
+runs:
+  using: "node20"
+  main: "dist/action.js"

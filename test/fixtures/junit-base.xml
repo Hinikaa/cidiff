@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="api-suite" tests="4" time="1.15">
+  <testsuite name="auth.spec" tests="3" failures="0" skipped="1" time="0.95">
+    <testcase name="validates JWT &amp; scopes" classname="auth.spec" time="0.25" />
+    <testcase time="0.60" classname="auth.spec" name="issues refresh token &lt;v2&gt;">
+      <system-out>ok</system-out>
+    </testcase>
+    <testcase classname="auth.spec" name="legacy session fallback" time="0.10">
+      <skipped message="deprecated" />
+    </testcase>
+  </testsuite>
+  <testsuite name="billing.spec" tests="1" time="0.20">
+    <testcase name="calculates tax &quot;EU&quot;" time="0.20" />
+  </testsuite>
+</testsuites>

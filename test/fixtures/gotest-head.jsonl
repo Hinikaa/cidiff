@@ -1,0 +1,4 @@
+{"Time":"2026-11-26T10:05:00Z","Action":"run","Package":"github.com/hinikaa/svc/cache","Test":"TestCacheLookup"}
+{"Time":"2026-11-26T10:05:01Z","Action":"pass","Package":"github.com/hinikaa/svc/cache","Test":"TestCacheLookup","Elapsed":1.92}
+{"Time":"2026-11-26T10:05:02Z","Action":"skip","Package":"github.com/hinikaa/svc/cache","Test":"TestCacheCluster","Elapsed":0.01}
+{"Time":"2026-11-26T10:05:02Z","Action":"pass","Package":"github.com/hinikaa/svc/cache","Elapsed":1.95}
